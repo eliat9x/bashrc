@@ -1,0 +1,13 @@
+
+# alias
+
+# History search
+if [[ $- =~ .*i.* ]]; then
+  bind '"\C-r": "\C-a hstr -- \C-j"'
+  export HSTR_CONFIG=hicolor         # better colors
+  export HISTCONTROL=ignoredups:erasedups
+  export HISTFILESIZE=10000
+  export HISTSIZE=10000
+  shopt -s histappend
+  PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+fi
