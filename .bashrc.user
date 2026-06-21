@@ -1,5 +1,6 @@
 
 # alias
+alias vi=nvim
 
 # History search
 if [[ $- =~ .*i.* ]]; then
