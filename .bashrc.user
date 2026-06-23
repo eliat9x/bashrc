@@ -6,13 +6,28 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias vi=nvim
 
+# ================================================================================
 # History search
-if [[ $- =~ .*i.* ]]; then
-  bind '"\C-r": "\C-a hstr -- \C-j"'
-  export HSTR_CONFIG=hicolor         # better colors
-  export HISTCONTROL=ignoredups:erasedups
-  export HISTFILESIZE=10000
-  export HISTSIZE=10000
-  shopt -s histappend
-  PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
-fi
+# HSTR configuration - add this to ~/.bashrc
+alias hh=hstr                    # hh to be alias for hstr
+export HSTR_CONFIG=hicolor,keywords-matching       # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+# ensure synchronization between bash memory and history file
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+function hstrnotiocsti {
+    { READLINE_LINE="$( { </dev/tty hstr ${READLINE_LINE}; } 2>&1 1>&3 3>&- )"; } 3>&1;
+    READLINE_POINT=${#READLINE_LINE}
+}
+# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind -x '"\C-r": "hstrnotiocsti"'; fi
+export HSTR_TIOCSTI=n
+
+# ================================================================================
+# parse git branch
+parse_git_branch() {
+    git branch --show-current 2>/dev/null
+}
+export PS1='\[\e[31m\]\u\[\e[0m\]\[\e[33m\]@\[\e[0m\]\[\e[32m\]\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\]$(branch=$(parse_git_branch); [ -n "$branch" ] && echo " \[\e[35m\]($branch)\[\e[0m\]")\$ '
