@@ -39,7 +39,7 @@ vim.pack.add({
   { src = "https://github.com/folke/tokyonight.nvim" },
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
-  { src = "https://github.com/neovim/nvim-lspconfig" },
+  -- { src = "https://github.com/neovim/nvim-lspconfig" },
 })
 
 -- =====================
@@ -75,10 +75,9 @@ end, { desc = "Find help" })
 -- =====================
 -- LSP
 -- =====================
-
-vim.lsp.enable({
-  "clangd",
-})
+-- vim.lsp.enable({
+--   "clangd",
+-- })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "References" })
