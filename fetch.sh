@@ -9,4 +9,8 @@ cp ~/.tmux.config .
 echo "Copying ~/.config/nvim/init.lua to here...."
 cp ~/.config/nvim/init.lua .
 
+echo "Copying ~/.gitconfig to here...."
+cp ~/.gitconfig .
+git config --file .gitconfig --remove-section user
+
 echo "finished"
