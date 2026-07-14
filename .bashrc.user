@@ -5,6 +5,7 @@ alias ..2='cd ../..'
 alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias vi=nvim
+alias ll='ls -lah --color=auto'
 export PROMPT_DIRTRIM=3
 
 # ================================================================================
