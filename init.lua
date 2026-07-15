@@ -40,6 +40,27 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-telescope/telescope.nvim" },
   -- { src = "https://github.com/neovim/nvim-lspconfig" },
+  "https://github.com/akinsho/toggleterm.nvim",
+})
+
+-- =====================
+-- toggleterm
+-- =====================
+require("toggleterm").setup({
+    size = 47,
+    open_mapping = [[<C-\>]],
+    direction = "float",
+    start_in_insert = true,
+    insert_mappings = true,
+    terminal_mappings = true,
+    persist_size = true,
+    persist_mode = true,
+    close_on_exit = false,
+    shell = vim.o.shell,
+})
+
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], {
+    desc = "Exit terminal mode",
 })
 
 -- =====================
