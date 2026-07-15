@@ -72,7 +72,32 @@ vim.cmd.colorscheme("tokyonight")
 -- =====================
 -- Telescope
 -- =====================
+require("telescope").setup({
+    defaults = {
+        sorting_strategy = "ascending",
 
+        layout_strategy = "horizontal",
+        layout_config = {
+            horizontal = {
+                prompt_position = "top",
+                preview_width = 0.55,
+            },
+            width = 0.95,
+            height = 0.95,
+        },
+
+        file_ignore_patterns = {
+            "%.git/",
+            "build/",
+            "node_modules/",
+            "%.cache/",
+        },
+
+        path_display = {
+            "smart",
+        },
+    },
+})
 vim.keymap.set("n", "<leader>sw", function()
   require("telescope.builtin").grep_string()
 end, { desc = "Find word under cursor" })
